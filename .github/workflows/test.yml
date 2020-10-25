@@ -33,6 +33,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: Install Build Dependencies
+        if: ${{ startsWith(matrix.platform, 'ubuntu') && startsWith(matrix.python-version, 'pypy') }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libxml2-dev libxslt1-dev
+
       - name: Install
         run: |
           make setup
