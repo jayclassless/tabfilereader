@@ -27,3 +27,7 @@ build::
 
 publish::
 	@poetry publish
+
+docs::
+	@rm -rf docs/build
+	@cd docs && make html

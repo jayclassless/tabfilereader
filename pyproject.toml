@@ -40,6 +40,9 @@ coverage = "*"
 pytest = "*"
 tidypy = "*"
 mypy = {version="*", markers = "platform_python_implementation=='CPython'"}
+Sphinx = "*"
+sphinx_rtd_theme = "*"
+sphinx-autodoc-typehints = "*"
 
 
 [tool.pytest.ini_options]
@@ -71,6 +74,7 @@ exclude = [
     '.pytest_cache/.*',
     '.mypy_cache/.*',
     'poetry.lock',
+    'docs/source/conf.py',
 ]
 vulture = {use = false}
 
