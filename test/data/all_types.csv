@@ -1,0 +1,4 @@
+string,integer,float,decimal,bool,date,time,datetime,json,jsonobject,jsonarray,base64
+good,123,12.34,12.34,TRUE,2020-05-22,12:34:56,2020-05-22T12:34:56,"{""foo"": 123}","{""foo"": 123}","[""foo"", 123]",aGVsbG8gd29ybGQ=
+bad,bad,bad,bad,bad,thursday,noon,thursday at noon,bad,bad,bad,bad
+missing,,,,,,,,,,,

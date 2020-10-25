@@ -1,0 +1,117 @@
+[build-system]
+requires = [
+    "poetry>=0.12",
+]
+build-backend = "poetry.masonry.api"
+
+
+[tool.poetry]
+name = "tabfilereader"
+version = "0.1.0"
+description = "A tool for reading tabular data files (CSV, Excel, ODS) using defined schemas"
+authors = [
+    "Jason Simeone <jay@classless.net>"
+]
+license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/jayclassless/tabfilereader"
+keywords = [
+    "csv",
+    "tsv",
+    "excel",
+    "xls",
+    "ods",
+    "parse",
+    "schema"
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Development Status :: 4 - Beta",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+xlrd3 = ">=1,<2"
+ezodf = ">=0.3,<0.4"
+lxml = ">=4,<5"  # required by ezodf, but not explicitly declared
+
+[tool.poetry.dev-dependencies]
+coverage = "*"
+pytest = "*"
+tidypy = "*"
+mypy = {version="*", markers = "platform_python_implementation=='CPython'"}
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-vv"
+
+
+[tool.coverage.run]
+data_file = ".coverage"
+source = [
+    "tabfilereader",
+]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "raise NotImplementedError",
+    "pragma: no cover",
+    "def __repr__",
+]
+
+
+[tool.tidypy]
+exclude = [
+    'test/.*',
+    'build/.*',
+    'dist/.*',
+    '.pytest_cache/.*',
+    '.mypy_cache/.*',
+    'poetry.lock',
+]
+vulture = {use = false}
+
+[tool.tidypy.pycodestyle]
+disabled = [
+    'W391',
+    'E731',
+]
+
+[tool.tidypy.pydocstyle]
+disabled = [
+    'D100', 'D104', 'D105', 'D107',
+    'D200', 'D202', 'D203', 'D205', 'D212',
+    'D400', 'D401', 'D415',
+]
+
+[tool.tidypy.pylint]
+disabled = [
+    'missing-docstring',
+    'trailing-newlines',
+]
+[tool.tidypy.pylint.options]
+min-public-methods = 0
+
+[tool.tidypy.pyflakes]
+disabled = [
+    'UnusedImport',
+    'ImportStarUsed',
+]
+
+[tool.tidypy.yamllint]
+disabled = [
+    'empty-lines',
+    'document-start',
+]
+
+[tool.tidypy.rstlint.options]
+sphinx-extensions = [
+    'sphinx.ext.autodoc',
+]
+ignore-roles = [
+    'ref',
+]
+
