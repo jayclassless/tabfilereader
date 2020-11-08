@@ -28,8 +28,8 @@ records from the file.
     >>> reader = tfr.CsvReader.open('test/data/simple_header.csv', MySchema)
     >>> for record, errors in reader:
     ...     print(record)
-    CsvRecord(column1='foo', column2=123)
-    CsvRecord(column1='bar', column2=None)
+    Record(column1='foo', column2=123)
+    Record(column1='bar', column2=None)
 
 
 Schemas

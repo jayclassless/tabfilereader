@@ -5,7 +5,7 @@
 from typing import Sequence, Type, Any, Iterator
 
 
-class CsvRecordBase:
+class RecordBase:
     """
     The base class for records that are read by tabfilereader.
 
@@ -44,7 +44,7 @@ class CsvRecordBase:
         return iter(self.__class__.__slots__)
 
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, (CsvRecordBase, dict)):
+        if not isinstance(other, (RecordBase, dict)):
             return NotImplemented
 
         if sorted(self) != sorted(other):
@@ -66,16 +66,16 @@ class CsvRecordBase:
         )
 
 
-def make_csvrecord_type(fields: Sequence[str]) -> Type:
+def make_record_type(fields: Sequence[str]) -> Type:
     """
-    Creates a CsvRecord type that handles the specified field names.
+    Creates a Record type that handles the specified field names.
 
     :param fields: The field names to support in the record.
     """
 
     return type(
-        'CsvRecord',
-        (CsvRecordBase,),
+        'Record',
+        (RecordBase,),
         {
             '__slots__': sorted(fields),
         },

@@ -13,7 +13,7 @@ from .reader import (
     OdsReader,
 )
 from .record import (
-    CsvRecordBase,
+    RecordBase,
 )
 from .schema import (
     Column,

@@ -29,7 +29,7 @@ import ezodf
 import xlrd3
 
 from .errors import TabFileReaderError, RecordErrors
-from .record import CsvRecordBase, make_csvrecord_type
+from .record import RecordBase, make_record_type
 from .schema import Schema
 from .util import RegexType
 
@@ -92,7 +92,7 @@ class Reader:
             list(self.schema._columns.values())[0].location,
             int,
         )
-        self._record_type = make_csvrecord_type(
+        self._record_type = make_record_type(
             list(self.schema._columns.keys())
         )
         self._records_read = 0
@@ -129,7 +129,7 @@ class Reader:
     def __iter__(self) -> Iterator:
         return self
 
-    def __next__(self) -> Tuple[CsvRecordBase, RecordErrors]:
+    def __next__(self) -> Tuple[RecordBase, RecordErrors]:
         raw: Sequence[str] = self._read_next_record()
 
         if not self._column_map:
