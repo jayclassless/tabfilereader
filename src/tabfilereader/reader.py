@@ -40,6 +40,20 @@ ReaderType = TypeVar('ReaderType', bound='Reader')
 
 
 class Reader:
+    """
+    The abstract base class for tabular file readers.
+
+    :param source_file:
+        The tabular file to read and parse. The file can be specified in
+        several ways:
+
+        * ``str`` - A string specifying a path to a file.
+        * ``pathlib.Path`` - A ``Path`` object specifying a path to a file.
+        * ``io.IOBase`` - An open ``IOBase`` object containing the file's
+          contents.
+    """
+
+    #: The schema definition that will be used when reading the file.
     schema: Type[Schema]
 
     # pylint: disable=protected-access
@@ -50,6 +64,18 @@ class Reader:
             source_file: SourceFileType,
             schema: Type[Schema],
             **options: Any) -> ReaderType:
+        """
+        Creates a ``Reader`` object and opens the specified file with it.
+
+        :param source_file:
+            The tabular file to read and parse.
+        :param schema:
+            The ``Schema`` class that defines the structure of the data to
+            expect in the file.
+        :param options:
+            Any of the options that this Reader allows.
+        """
+
         reader_type = type(
             cls.__name__,
             (cls,),
@@ -82,12 +108,22 @@ class Reader:
 
     @property
     def column_map(self) -> Optional[ColumnMapType]:
+        """
+        A mapping describing the columns found in the file. The keys are the
+        integer position of the column in the file, and the values are the
+        names of the columns as defined in the Schema used in this Reader.
+        """
+
         if self._column_map is not None:
             return dict(self._column_map)
         return None
 
     @property
     def records_read(self) -> int:
+        """
+        The number of records that have been read from the file so far.
+        """
+
         return self._records_read
 
     def __iter__(self) -> Iterator:
@@ -188,7 +224,7 @@ class Reader:
         return cmap
 
 
-class CsvDialect(csv.Dialect):
+class _CsvDialect(csv.Dialect):
     def __init__(self, **kwargs: Any) -> None:
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -196,23 +232,59 @@ class CsvDialect(csv.Dialect):
 
 
 class CsvReader(Reader):
+    """
+    A ``Reader`` capable of reading CSV (Comma Separated Value) files.
+
+    Available options:
+
+    * ``encoding``
+    * ``delimiter``
+    * ``doublequote``
+    * ``escapechar``
+    * ``quotechar``
+    * ``quoting``
+    * ``skipinitialspace``
+    """
+
+    #: The encoding to use when decoding the file. If not specified, the system
+    #: default will be used.
     encoding: Optional[str] = None
+
+    #: A one-character string used to separate fields. It defaults to ``,``.
     delimiter: str = ','
+
+    #: Controls how instances of quotechar appearing inside a field should
+    #: themselves be quoted. When ``True```, the character is doubled. When
+    #: ``False```, the escapechar is used as a prefix to the quotechar. It
+    #: defaults to ``True```.
     doublequote: bool = True
+
+    #: Removes any special meaning from the following character. It defaults
+    #: to ``None```, which disables escaping.
     escapechar: Optional[str] = None
+
+    #: A one-character string used to quote fields containing special
+    #: characters, such as the delimiter or quotechar, or which contain
+    #: new-line characters. It defaults to ``"``.
     quotechar: str = '"'
+
+    #: Controls when quotes should be recognised by the reader. It can take on
+    #: any of the ``csv.QUOTE_*`` constants and defaults to
+    #: ``csv.QUOTE_MINIMAL``.
     quoting: int = csv.QUOTE_MINIMAL
-    lineterminator: str = '\r\n'
+
+    #: When ``True``, whitespace immediately following the delimiter is
+    #: ignored. The default is ``False``.
     skipinitialspace: bool = False
 
     def _init_reader(self, source_file: Union[io.IOBase, Path]) -> None:
-        dialect = CsvDialect(
+        dialect = _CsvDialect(
             delimiter=self.delimiter,
             doublequote=self.doublequote,
             escapechar=self.escapechar,
             quotechar=self.quotechar,
             quoting=self.quoting,
-            lineterminator=self.lineterminator,
+            lineterminator='\r\n',
             skipinitialspace=self.skipinitialspace,
         )
 
@@ -246,14 +318,30 @@ class CsvReader(Reader):
 
 
 class ExcelReader(Reader):
+    """
+    A ``Reader`` capable of reading Excel files. Supports both XLS- and
+    XLSX-formatted files.
+
+    Available options:
+
+    * ``worksheet``
+    * ``encoding``
+    """
+
+    #: Specifies which worksheet within the file that should be read. Can be
+    #: either the zero-based integer position of the worksheet, a string with
+    #: the worksheet's name, or a ``re.Pattern`` that will match the
+    #: worksheet's name. Defaults to ``0`` (the first worksheet in the file).
     worksheet: Union[int, str, RegexType] = 0
+
+    #: The encoding to use when the CODEPAGE that should be described in the
+    #: file is missing or wrong.
     encoding: Optional[str] = None
-    on_demand: bool = True
 
     def _init_reader(self, source_file: Union[io.IOBase, Path]) -> None:
         wb_kwargs: Dict[str, Any] = {
             'encoding_override': self.encoding,
-            'on_demand': self.on_demand,
+            'on_demand': True,
         }
 
         if isinstance(source_file, Path):
@@ -330,6 +418,18 @@ class ExcelReader(Reader):
 
 
 class OdsReader(Reader):
+    """
+    A ``Reader`` capable of reading OpenDocumentFormat files.
+
+    Available options:
+
+    * ``worksheet``
+    """
+
+    #: Specifies which worksheet within the file that should be read. Can be
+    #: either the zero-based integer position of the worksheet, a string with
+    #: the worksheet's name, or a ``re.Pattern`` that will match the
+    #: worksheet's name. Defaults to ``0`` (the first worksheet in the file).
     worksheet: Union[int, str, RegexType] = 0
 
     def _init_reader(self, source_file: Union[io.IOBase, Path]) -> None:
