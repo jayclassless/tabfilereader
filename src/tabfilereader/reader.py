@@ -22,6 +22,7 @@ from typing import (
     Tuple,
     Dict,
     Any,
+    TypeVar,
 )
 
 import ezodf
@@ -34,6 +35,8 @@ from .util import RegexType
 
 
 ColumnMapType = Mapping[int, str]
+SourceFileType = Union[io.IOBase, Path, str]
+ReaderType = TypeVar('ReaderType', bound='Reader')
 
 
 class Reader:
@@ -41,9 +44,23 @@ class Reader:
 
     # pylint: disable=protected-access
 
-    def __init__(
-            self,
-            source_file: Union[io.IOBase, Path, str]):
+    @classmethod
+    def open(
+            cls,
+            source_file: SourceFileType,
+            schema: Type[Schema],
+            **options: Any) -> ReaderType:
+        reader_type = type(
+            cls.__name__,
+            (cls,),
+            {
+                'schema': schema,
+                **options,
+            },
+        )
+        return reader_type(source_file)
+
+    def __init__(self, source_file: SourceFileType):
         self._column_map: Optional[ColumnMapType] = None
         self._expects_header_record = not isinstance(
             list(self.schema._columns.values())[0].location,

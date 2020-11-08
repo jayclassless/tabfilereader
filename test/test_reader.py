@@ -29,20 +29,11 @@ class ReaderTest:
         else:
             src = self.source
 
-        reader_type = type(
-            'TestReader',
-            (self.reader_type,),
-            {
-                'schema': self.schema,
-                **self.reader_kwargs
-            },
-        )
-
         if self.error:
             with pytest.raises(self.error[0], match=self.error[1]):
-                self.reader = reader_type(src)
+                self.reader = self.reader_type.open(src, self.schema, **self.reader_kwargs)
             return
-        self.reader = reader_type(src)
+        self.reader = self.reader_type.open(src, self.schema, **self.reader_kwargs)
 
         assert self.reader.records_read == 0
         assert self.reader.column_map is None
