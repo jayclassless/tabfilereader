@@ -419,7 +419,7 @@ class ExcelReader(Reader):
 
 class OdsReader(Reader):
     """
-    A ``Reader`` capable of reading OpenDocumentFormat files.
+    A ``Reader`` capable of reading OpenDocumentFormat spreadsheet files.
 
     Available options:
 

@@ -13,7 +13,7 @@ class StringType:
     A data type for Columns that coerces values to ``str``.
     """
 
-    def __call__(self, value: str) -> str:
+    def __call__(self, value: str) -> str:  # noqa: D102
         return str(value)
 
 
@@ -22,7 +22,7 @@ class IntegerType:
     A data type for Columns that coerces values to ``int``.
     """
 
-    def __call__(self, value: str) -> int:
+    def __call__(self, value: str) -> int:  # noqa: D102
         return int(value.split('.', 1)[0])
 
 
@@ -31,7 +31,7 @@ class FloatType:
     A data type for Columns that coerces values to ``float``.
     """
 
-    def __call__(self, value: str) -> float:
+    def __call__(self, value: str) -> float:  # noqa: D102
         return float(value)
 
 
@@ -40,7 +40,7 @@ class DecimalType:
     A data type for Columns that coerces values to ``decimal.Decimal``.
     """
 
-    def __call__(self, value: str) -> decimal.Decimal:
+    def __call__(self, value: str) -> decimal.Decimal:  # noqa: D102
         try:
             return decimal.Decimal(value)
         except decimal.InvalidOperation as exc:
@@ -69,7 +69,7 @@ class BooleanType:
         '0': False,
     }
 
-    def __call__(self, value: str) -> bool:
+    def __call__(self, value: str) -> bool:  # noqa: D102
         val = self.VALUE_MAP.get(value.upper())
         if val is None:
             raise ValueError('Not a valid boolean')
@@ -89,14 +89,14 @@ class DateTimeTypeBase:
 
     formats: Sequence[str]
 
-    def __init__(self, fmt: Optional[Union[str, Sequence[str]]] = None):
+    def __init__(self, fmt: Optional[Union[str, Sequence[str]]] = None):  # noqa: D102
         if isinstance(fmt, str):
             self.formats = [fmt]
         elif fmt is not None:
             self.formats = fmt
 
     def __call__(self, value: str) -> Union[
-            datetime.date, datetime.time, datetime.datetime]:
+            datetime.date, datetime.time, datetime.datetime]:  # noqa: D102
         for fmt in self.formats:
             try:
                 return self.convert(value, fmt)
@@ -109,7 +109,7 @@ class DateTimeTypeBase:
             )
         )
 
-    def convert(self, value: str, fmt: str) -> Any:
+    def convert(self, value: str, fmt: str) -> Any:  # noqa: D102
         raise NotImplementedError()
 
 
@@ -130,7 +130,7 @@ class DateType(DateTimeTypeBase):
         '%Y-%m-%d',
     ]
 
-    def convert(self, value: str, fmt: str) -> datetime.date:
+    def convert(self, value: str, fmt: str) -> datetime.date:  # noqa: D102
         return datetime.datetime.strptime(value, fmt).date()
 
 
@@ -167,7 +167,7 @@ class TimeType(DateTimeTypeBase):
         '%H:%M:%S.%f',
     ]
 
-    def convert(self, value: str, fmt: str) -> datetime.time:
+    def convert(self, value: str, fmt: str) -> datetime.time:  # noqa: D102
         return datetime.datetime.strptime(value, fmt).time()
 
 
@@ -206,7 +206,7 @@ class DateTimeType(DateTimeTypeBase):
         '%Y-%m-%dT%H:%M:%S.%f%z',
     ]
 
-    def convert(self, value: str, fmt: str) -> datetime.datetime:
+    def convert(self, value: str, fmt: str) -> datetime.datetime:  # noqa: D102
         return datetime.datetime.strptime(value, fmt)
 
 
@@ -223,7 +223,7 @@ class JsonType:
     A data type for Columns that allows JSON-encoded values.
     """
 
-    def __call__(self, value: str) -> Any:
+    def __call__(self, value: str) -> Any:  # noqa: D102
         try:
             return json.loads(value)
         except json.JSONDecodeError as exc:
@@ -236,7 +236,7 @@ class JsonObjectType(JsonType):
     them to ``dict``.
     """
 
-    def __call__(self, value: str) -> dict:
+    def __call__(self, value: str) -> dict:  # noqa: D102
         parsed = super().__call__(value)
         if not isinstance(parsed, dict):
             raise ValueError('Not a JSON-encoded object')
@@ -249,7 +249,7 @@ class JsonArrayType(JsonType):
     them to ``list``.
     """
 
-    def __call__(self, value: str) -> list:
+    def __call__(self, value: str) -> list:  # noqa: D102
         parsed = super().__call__(value)
         if not isinstance(parsed, list):
             raise ValueError('Not a JSON-encoded array')
@@ -262,7 +262,7 @@ class Base64Type:
     them to ``bytes``.
     """
 
-    def __call__(self, value: str) -> bytes:
+    def __call__(self, value: str) -> bytes:  # noqa: D102
         try:
             return base64.b64decode(value)
         except binascii.Error as exc:

@@ -1,5 +1,5 @@
-Welcome to tabfilereader's documentation!
-=========================================
+tabfilereader Documentation
+===========================
 
 .. toctree::
    :maxdepth: 2
@@ -10,9 +10,6 @@ Welcome to tabfilereader's documentation!
    changes
    license
 
-
-Indices and tables
-==================
 
 * :ref:`genindex`
 * :ref:`search`
