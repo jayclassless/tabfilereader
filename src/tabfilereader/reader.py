@@ -130,6 +130,19 @@ class Reader:
         return self
 
     def __next__(self) -> Tuple[RecordBase, RecordErrors]:
+        return self.get_record()
+
+    def get_record(self) -> Tuple[RecordBase, RecordErrors]:
+        """
+        Retrieves the next record in the file.
+
+        Returns a tuple of two values:
+
+        * The first value contains the contents of the columns in the record.
+        * The second value is a collection of errors encountered while parsing
+          the record.
+        """
+
         raw: Sequence[str] = self._read_next_record()
 
         if not self._column_map:
