@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome &mdash; tabfilereader 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="tabfilereader Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> tabfilereader
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Welcome</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#schemas">Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#readers">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">MIT License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tabfilereader</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome">
+<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/tabfilereader"><img alt="https://img.shields.io/pypi/v/tabfilereader.svg" src="https://img.shields.io/pypi/v/tabfilereader.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/tabfilereader"><img alt="https://img.shields.io/pypi/l/tabfilereader.svg" src="https://img.shields.io/pypi/l/tabfilereader.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/jayclassless/tabfilereader/actions"><img alt="https://github.com/jayclassless/tabfilereader/workflows/Test/badge.svg" src="https://github.com/jayclassless/tabfilereader/workflows/Test/badge.svg" /></a>
+<a class="reference external image-reference" href="https://jayclassless.github.io/tabfilereader/"><img alt="https://github.com/jayclassless/tabfilereader/workflows/Docs/badge.svg" src="https://github.com/jayclassless/tabfilereader/workflows/Docs/badge.svg" /></a>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code> is a small library to make reading flat, tabular data from
+files a bit less tedious.</p>
+<p>At its base, to use <code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code>, you simply define your Schema, then use
+it to open a Reader. You can then iterate through the Reader to retrieve
+records from the file.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tabfilereader</span> <span class="k">as</span> <span class="nn">tfr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MySchema</span><span class="p">(</span><span class="n">tfr</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">column1</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;column_1&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">column2</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;column_2&#39;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">tfr</span><span class="o">.</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">data_required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reader</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">CsvReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test/data/simple_header.csv&#39;</span><span class="p">,</span> <span class="n">MySchema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">record</span><span class="p">,</span> <span class="n">errors</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+<span class="go">Record(column1=&#39;foo&#39;, column2=123)</span>
+<span class="go">Record(column1=&#39;bar&#39;, column2=None)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schemas">
+<h2>Schemas<a class="headerlink" href="#schemas" title="Permalink to this headline">¶</a></h2>
+<p>Schema classes tell <code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code> what columns to expect in the file, and
+what datatypes the values contained in them should be cast as. You create your
+schemas by defining a class that inherits from <code class="docutils literal notranslate"><span class="pre">tabfilereader.Schema</span></code>. In
+this class, you define properties that are instances of
+<code class="docutils literal notranslate"><span class="pre">tabfilereader.Column</span></code>, which specify where columns are in the file, and what
+their datatype is. An example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ExampleSchema</span><span class="p">(</span><span class="n">tfr</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">first</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;First Name&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">last</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;Last Name&#39;</span><span class="p">,</span> <span class="n">data_required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">birthdate</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^Birth.*&#39;</span><span class="p">),</span> <span class="n">data_type</span><span class="o">=</span><span class="n">tfr</span><span class="o">.</span><span class="n">DateType</span><span class="p">())</span>
+<span class="gp">... </span>    <span class="n">weight</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">tfr</span><span class="o">.</span><span class="n">FloatType</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Columns require at least one argument that tells <code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code> how to find
+the column in the file. For files where the first record contains column names,
+you can specify either:</p>
+<ul class="simple">
+<li><p>The exact name of the column as a string.</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">re.Pattern</span></code> that will match the column name.</p></li>
+<li><p>A sequence of strings or <code class="docutils literal notranslate"><span class="pre">re.Pattern</span></code> objects that the column could
+possibly be named as.</p></li>
+</ul>
+<p>For files that do not contain a header record, you specify the column’s
+location with an zero-based integer index.</p>
+<p>Columns also take a series of optional parameters:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">required</span></code></dt><dd><p>To indicate whether or not it is required that this column exists in the
+file. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">data_required</span></code></dt><dd><p>To indicate whether or not the column must have a value for every record in
+the file. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">data_type</span></code></dt><dd><p>With this parameter, you can provide a <code class="docutils literal notranslate"><span class="pre">callable</span></code> that will receive a
+string value from the file and return a parsed and properly-typed value. If
+the value is invalid, the callable should throw a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.
+<code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code> provides an array of pre-defined Types that you can use
+here for the most common data types (numbers, dates, strings, etc).
+See the API documentation for all the available pre-defined Types. This
+parameter defaults to <code class="docutils literal notranslate"><span class="pre">tabfilereader.StringType()</span></code> if not specified.</p>
+</dd>
+</dl>
+<p>There are also a handful of optional parameteres that can be declared on the
+Schema itself. The available options are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ignore_unknown_columns</span></code></dt><dd><p>To indicate what should be done if a Reader finds columns in the file that
+are not declared in the Schema. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>, which means the
+Reader will throw an exception.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ignore_empty_records</span></code></dt><dd><p>To indicate what should be done if a Reader encounters a record with no
+columns whatsoever. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>, which means the reader will
+return a record that is full of errors. This option is particularly useful
+for CSV files when people are a bit sloppy with their newlines at the end
+of a file.</p>
+</dd>
+</dl>
+<p>To set these Schema-level options, pass them as keyword arguments in the class
+declaration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">SchemaWithOptions</span><span class="p">(</span><span class="n">tfr</span><span class="o">.</span><span class="n">Schema</span><span class="p">,</span> <span class="n">ignore_unknown_columns</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">column1</span> <span class="o">=</span> <span class="n">tfr</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;column_1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="readers">
+<h2>Readers<a class="headerlink" href="#readers" title="Permalink to this headline">¶</a></h2>
+<p>Readers use the Schemas to interpret the contents of the tabular files.
+<code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code> provides the following Readers to handle various types of
+files:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">CsvReader</span></code></dt><dd><p>Handles Comma Separated Value files (or similarly-constructed files; TSV,
+etc).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ExcelReader</span></code></dt><dd><p>Handles Excel spreadsheets; either XLS- or XLSX-formatted.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OdsReader</span></code></dt><dd><p>Handles OpenDocumentFormat spreadsheets.</p>
+</dd>
+</dl>
+<p>Readers can be created by either calling the <code class="docutils literal notranslate"><span class="pre">open()</span></code> classmethod on the
+specific Reader class you want to use, or by defining your own Reader class
+that inherits from one provided by <code class="docutils literal notranslate"><span class="pre">tabfilereader</span></code> like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyReader</span><span class="p">(</span><span class="n">tfr</span><span class="o">.</span><span class="n">CsvReader</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">schema</span> <span class="o">=</span> <span class="n">MySchema</span>
+<span class="gp">... </span>    <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reader</span> <span class="o">=</span> <span class="n">MyReader</span><span class="p">(</span><span class="s1">&#39;test/data/simple_header_pipe.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each reader allows for a variety of optional parameters (like <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> in
+the example above). See the API documentation for a full listing of the options
+for each.</p>
+<p>Readers are iterable. Each iteration returns a tuple of two values. The first
+value is a Record that contains the values from the file. The second value is
+a collection of all the errors encountered when trying to parse the values in
+the columns.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="o">.</span><span class="n">column1</span>
+<span class="go">&#39;foo&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;column2&#39;</span><span class="p">]</span>
+<span class="go">123</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="o">.</span><span class="n">column1</span>
+<span class="go">&#39;bar&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;column2&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">errors</span><span class="p">[</span><span class="s1">&#39;column2&#39;</span><span class="p">]</span>
+<span class="go">&#39;A value is required&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>This project is released under the terms of the <a class="reference external" href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="tabfilereader Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Jason Simeone
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
